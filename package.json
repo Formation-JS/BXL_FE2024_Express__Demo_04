@@ -1,0 +1,22 @@
+{
+  "name": "demo-04-sequelize",
+  "version": "1.0.0",
+  "description": "Demo de l'utilisation d'un DB SQL avec Sequelize",
+  "license": "ISC",
+  "author": "Aurélien St",
+  "type": "module",
+  "main": "src/app.js",
+  "scripts": {
+    "start": "node --env-file-if-exists=.env src/app.js",
+    "dev": "nodemon --env-file=.env src/app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "pg": "^8.16.3",
+    "pg-hstore": "^2.3.4",
+    "sequelize": "^6.37.7"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}
