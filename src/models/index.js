@@ -1,5 +1,8 @@
 import { Sequelize } from "sequelize";
 import authorModel from "./author.model.js";
+import bookModel from "./book.model.js";
+import sagaModel from "./saga.model.js";
+import genreModel from "./genre.model.js";
 
 // Récuperation des variables d'env
 const { DB_DATABASE, DB_USER, DB_PASSWORD, DB_SERVER, DB_PORT } = process.env;
@@ -20,13 +23,23 @@ db.sequelize = sequelize;
 
 // - Les models
 db.Author = authorModel(sequelize);
-db.Book = null; //TODO Finish this !
+db.Book = bookModel(sequelize);
+db.Saga = sagaModel(sequelize);
+db.Genre = genreModel(sequelize);
 
 // - Les relations entre les models
-//? (One to  Many)
-// db.Author.hasMany(db.Book);
-// db.Book.belongsTo(db.Author);
+//? Author/Book (One to  Many)
+db.Author.hasMany(db.Book);
+db.Book.belongsTo(db.Author);
 
-//? (Many to  Many)
-// db.Author.belongsToMany(db.Book, { through: 'author_book' });
-// db.Book.belongsToMany(db.Author, { through: 'author_book' });
+//? Saga/Book (One to  Many)
+db.Saga.hasMany(db.Book);
+db.Book.belongsTo(db.Saga);
+
+// ? Genre/Book (Many to  Many)
+db.Genre.belongsToMany(db.Book, { through: 'book_genre' });
+db.Book.belongsToMany(db.Genre, { through: 'book_genre' });
+
+//? Genre/Saga (Many to  Many)
+db.Genre.belongsToMany(db.Saga, { through: 'saga_genre' });
+db.Saga.belongsToMany(db.Genre, { through: 'saga_genre' });
