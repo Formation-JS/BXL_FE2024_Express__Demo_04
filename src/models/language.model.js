@@ -6,7 +6,7 @@ import { DataTypes, Sequelize } from "sequelize";
  */
 export default function languageModel(sequelize) {
 
-    const Language = sequelize.define('language', {
+    const Language = sequelize.define('Language', {
         name: {
             type: DataTypes.STRING(50),
             allowNull: false
